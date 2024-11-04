@@ -1,11 +1,11 @@
 package entities
 
-type IrisClass string
+type IrisClass int
 
 const (
-	IrisClassSetosa     IrisClass = "setosa"
-	IrisClassVersicolor IrisClass = "versicolor"
-	IrisClassVirginica  IrisClass = "virginica"
+	IrisClassSetosa     IrisClass = 0
+	IrisClassVersicolor IrisClass = iota
+	IrisClassVirginica  IrisClass = iota
 )
 
 type Irises []Iris
