@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	data, err := clients.LoadData("iris.csv")
+	data, err := clients.LoadAllData("../training_samples/")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -19,6 +19,9 @@ func main() {
 	classifier.CalculateStatistics(data)
 
 	sample := []float64{5.1, 3.5, 1.4, 0.2}
-	predictedClass := classifier.Classify(sample)
+	predictedClass, err := clients.MapIrisClassToStr(classifier.Classify(sample))
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Printf("Предсказанный класс для образца %+v: %s\n", sample, predictedClass)
 }

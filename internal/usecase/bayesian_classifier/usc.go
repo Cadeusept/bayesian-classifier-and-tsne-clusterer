@@ -8,14 +8,14 @@ import (
 	"github.com/Cadeusept/bayesian-classifier/internal/entities"
 )
 
-type BayesianClassifier struct {
+type Usc struct {
 	ClassMeans       map[entities.IrisClass][]float64
 	ClassCovariances map[entities.IrisClass][][]float64
 	ClassCounts      map[entities.IrisClass]int
 }
 
-func New() *BayesianClassifier {
-	return &BayesianClassifier{
+func New() *Usc {
+	return &Usc{
 		ClassMeans:       make(map[entities.IrisClass][]float64),
 		ClassCovariances: make(map[entities.IrisClass][][]float64),
 		ClassCounts:      make(map[entities.IrisClass]int),
@@ -23,7 +23,7 @@ func New() *BayesianClassifier {
 }
 
 // Функция для вычисления среднего и дисперсии для каждого класса
-func (usc *BayesianClassifier) CalculateStatistics(data []entities.Iris) {
+func (usc *Usc) CalculateStatistics(data []entities.Iris) {
 	for _, sample := range data {
 		class := sample.Class
 		usc.ClassCounts[class]++
@@ -70,7 +70,7 @@ func (usc *BayesianClassifier) CalculateStatistics(data []entities.Iris) {
 }
 
 // Функция для классификации нового образца
-func (usc *BayesianClassifier) Classify(sample []float64) entities.IrisClass {
+func (usc *Usc) Classify(sample []float64) entities.IrisClass {
 	var bestClass entities.IrisClass
 	var bestProb float64
 	totalCount := 0
