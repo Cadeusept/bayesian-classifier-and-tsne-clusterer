@@ -1,4 +1,4 @@
-module github.com/Cadeusept/bayesian-classifier
+module github.com/Cadeusept/bayesian-classifier-and-tsne-clusterer
 
 go 1.23.1
 

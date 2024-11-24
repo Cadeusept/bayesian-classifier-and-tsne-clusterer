@@ -4,7 +4,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/Cadeusept/bayesian-classifier/internal/clients"
+	"github.com/Cadeusept/bayesian-classifier-and-tsne-clusterer/internal/clients"
 	"github.com/stretchr/testify/suite"
 )
 

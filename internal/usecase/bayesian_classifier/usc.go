@@ -5,7 +5,8 @@ import (
 
 	"gonum.org/v1/gonum/stat/distmv"
 
-	"github.com/Cadeusept/bayesian-classifier/internal/entities"
+	"github.com/Cadeusept/bayesian-classifier-and-tsne-clusterer/internal"
+	"github.com/Cadeusept/bayesian-classifier-and-tsne-clusterer/internal/entities"
 )
 
 type Usc struct {
@@ -79,7 +80,7 @@ func (usc *Usc) Classify(sample []float64) entities.IrisClass {
 	}
 
 	for class, mean := range usc.ClassMeans {
-		dist, ok := distmv.NewNormal(mean, toSymDense(usc.ClassCovariances[class]), nil)
+		dist, ok := distmv.NewNormal(mean, internal.ToSymDense(usc.ClassCovariances[class]), nil)
 		if !ok {
 			log.Fatal("Ошибка создания распределения для класса", class)
 		}

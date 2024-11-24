@@ -17,3 +17,12 @@ type Iris struct {
 	PetalWidth  float64
 	Class       IrisClass
 }
+
+// ToMatrix превращает Irises в 2D матрицу
+func (irises Irises) ToMatrix() [][]float64 {
+	matrix := make([][]float64, len(irises))
+	for i, iris := range irises {
+		matrix[i] = []float64{iris.SepalLength, iris.SepalWidth, iris.PetalLength, iris.PetalWidth}
+	}
+	return matrix
+}
