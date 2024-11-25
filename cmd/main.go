@@ -89,9 +89,9 @@ func startClusterer(scanner *bufio.Scanner, writer *bufio.Writer, data *entities
 		log.Fatal("empty data")
 	}
 
-	clusterer := tsne_clusterer.New(2, 1.0, 300, 0.1) // 2D t-SNE with sigma=1, 300 iterations, learning rate=0.1
+	clusterer := tsne_clusterer.New(200, 300, 1000) // 2D t-SNE with sigma=1, 300 iterations, learning rate=0.1
 
-	clusterer.Train(data.ToMatrix()) // Assuming ToMatrix converts data into [][]float64
+	clusterer.Train(*data) // Assuming ToMatrix converts data into [][]float64
 
 	fmt.Println("Enter number of items you want to predict cluster for")
 	scanner.Scan()
@@ -113,7 +113,14 @@ func startClusterer(scanner *bufio.Scanner, writer *bufio.Writer, data *entities
 			sample[j] = f
 		}
 
-		predictedClass := clusterer.Predict(sample) // No need to check for error here
+		sampleIris := entities.Iris{
+			SepalLength: sample[0],
+			SepalWidth:  sample[1],
+			PetalLength: sample[2],
+			PetalWidth:  sample[3],
+		}
+
+		predictedClass := clusterer.Predict(sampleIris) // No need to check for error here
 		writer.WriteString(fmt.Sprintf("Predicted cluster for sample %+v: %d\n", sample, predictedClass))
 	}
 
