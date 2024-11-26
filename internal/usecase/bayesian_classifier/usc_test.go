@@ -4,7 +4,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/Cadeusept/bayesian-classifier/internal/clients"
+	"github.com/Cadeusept/bayesian-classifier-and-tsne-clusterer/internal/clients"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -20,7 +20,7 @@ func TestBayesianClassifierUscSuite(t *testing.T) {
 }
 
 func (s *bayesianClassifierUscSuite) SetupSuite() {
-	data, err := clients.LoadAllData("../training_samples/")
+	data, err := clients.LoadAllData("../../../training_samples/")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -40,5 +40,5 @@ func (s *bayesianClassifierUscSuite) TestClassify() {
 	s.Suite.Require().EqualValues(1, predictedVersicolorClass)
 
 	predictedVirginicaClass := s.svc.Classify([]float64{6.5, 3.0, 5.5, 1.8})
-	s.Suite.Require().EqualValues(1, predictedVirginicaClass)
+	s.Suite.Require().EqualValues(2, predictedVirginicaClass)
 }

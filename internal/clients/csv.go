@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/Cadeusept/bayesian-classifier/internal/entities"
+	"github.com/Cadeusept/bayesian-classifier-and-tsne-clusterer/internal/entities"
 )
 
 func LoadAllData(path string) (entities.Irises, error) {
