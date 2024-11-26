@@ -1,6 +1,11 @@
 package internal
 
-import "gonum.org/v1/gonum/mat"
+import (
+	"math"
+
+	"golang.org/x/exp/rand"
+	"gonum.org/v1/gonum/mat"
+)
 
 // Преобразование [][]float64 в *mat.SymDense
 func ToSymDense(matrix [][]float64) *mat.SymDense {
@@ -25,4 +30,35 @@ func ToMatDense(data [][]float64) *mat.Dense {
 	}
 
 	return mat.NewDense(rows, cols, flatData)
+}
+
+// Функция для проверки, равны ли два набора центров кластеров
+func EqualCentroids(c1, c2 [][]float64) bool {
+	for i := range c1 {
+		for j := range c1[i] {
+			if math.Abs(c1[i][j]-c2[i][j]) > 1e-4 {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+// Функция для вычисления евклидова расстояния между двумя точками
+func EuclideanDistance(p1, p2 []float64) float64 {
+	var sum float64
+	for i := 0; i < len(p1); i++ {
+		sum += math.Pow(p1[i]-p2[i], 2)
+	}
+	return math.Sqrt(sum)
+}
+
+// Функция для случайной инициализации центров кластеров
+func InitializeCentroids(data [][]float64, k int) [][]float64 {
+	centroids := make([][]float64, k)
+	// Случайным образом выбираем k центров
+	for i := 0; i < k; i++ {
+		centroids[i] = data[rand.Intn(len(data))]
+	}
+	return centroids
 }
